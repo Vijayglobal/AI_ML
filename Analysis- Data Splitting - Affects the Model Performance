@@ -1,0 +1,38 @@
+Exploratory Data Analysis (EDA)
+
+I first converted the dataset into a pandas DataFrame for detailed exploration.
+The Wine dataset contains 13 features and 1 target column, where the target has three classes: 0, 1, and 2.
+After checking all columns, there are no null values, so the dataset is suitable for supervised learning.
+
+Data Splitting
+I split the data into training, validation, and test sets using random_state to ensure reproducibility, and stratify=y so that each split maintains the original class distribution.
+
+A) 60:20:20 split : 
+
+Validation Accuracy: 94.44%
+Test Accuracy: 97.22%
+With this split, a moderate number of observations are available for both validation and testing, balancing hyperparameter tuning and unbiased final evaluation.
+
+B) 70:15:15 split
+
+Validation Accuracy: 100%
+Test Accuracy: 96.30%
+Here, the training set is larger, which may improve the model’s learning. However, the smaller test set size can make performance estimates less stable due to fewer observations.
+
+
+What if we omit the validation set?
+If we use only training and test sets, we would have to tune hyperparameters on the test set. This exposes the test data to the model during development, 
+leading to data leakage and overly optimistic performance estimates. The test set should remain completely unseen until the final evaluation.
+
+Applying this to the capstone project, I will:
+
+a) Perform EDA to understand the data and handle any necessary pre-processing.
+b) Split the dataset into training, validation, and test sets, with stratification to preserve class distribution.
+c) Use the validation set to tune hyperparameters (e.g., n_neighbors in KNN).
+d) Train the final model using the training data with the best-found parameters.
+e) Evaluate the tuned model only once on the hidden test set to obtain the final, unbiased accuracy.
+
+This approach ensures that:
+
+a) The model generalises well to unseen data.
+b) The final performance estimate is reliable.
